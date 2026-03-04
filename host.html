@@ -1,1 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+<h1 class="title">主持人控制台</h1>
+
+<button onclick="celebrate()">公布前三名🎆</button>
+
+<script>
+function celebrate(){
+confetti({
+particleCount:200,
+spread:120,
+origin:{y:0.6}
+});
+}
+</script>
+
+</body>
+</html>
 
