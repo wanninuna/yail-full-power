@@ -1,1 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1 class="title">🦷 牙力全開 🦷</h1>
+
+<div class="card" id="startScreen">
+<input type="text" id="name" placeholder="輸入名字">
+<button onclick="joinGame()">加入遊戲</button>
+</div>
+
+<div class="card" id="gameScreen" style="display:none;">
+<h2 id="question"></h2>
+<div id="options"></div>
+<p class="timer">剩餘：<span id="time">8</span> 秒</p>
+</div>
+
+<div class="card" id="resultScreen" style="display:none;">
+<h2>遊戲結束 🎉</h2>
+<p id="score"></p>
+<p id="ranking"></p>
+</div>
+
+<script type="module" src="game.js"></script>
+</body>
+</html>
 
