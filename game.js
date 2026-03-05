@@ -124,8 +124,8 @@ async function showResult(score){
 
   document.getElementById("ranking").textContent="你的名次："+rank;
 }
-  document.getElementById("ranking").textContent="你的名次："+rank;
-}
+
+
 
 
 
