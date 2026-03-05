@@ -32,6 +32,7 @@ window.joinGame = function(){
 }
 
 function showQuestion(){
+  clearInterval(timer);
   let q = questions[current];
   document.getElementById("question").textContent = q.question;
   let optionsDiv = document.getElementById("options");
@@ -59,20 +60,29 @@ function startTimer(){
 }
 
 function checkAnswer(i){
+  if(current >= questions.length) return;
+
   if(i===questions[current].answer){
     correct++;
   }
+
+  clearInterval(timer);
+  nextQuestion();
+}
   clearInterval(timer);
   nextQuestion();
 }
 
 function nextQuestion(){
+  clearInterval(timer);
   current++;
-  if(current<questions.length){
-    showQuestion();
-  } else {
+
+  if(current >= questions.length){
     endGame();
+    return;
   }
+
+  showQuestion();
 }
 
 async function endGame(){
@@ -98,4 +108,5 @@ async function showResult(score){
   let rank = players.findIndex(p=>p.name===playerName)+1;
   document.getElementById("ranking").textContent="你的名次："+rank;
 }
+
 
