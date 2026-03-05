@@ -1,7 +1,7 @@
 import { db } from "./firebase-config.js";
 import {
-collection, addDoc, getDocs, deleteDoc, doc, updateDoc
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+collection, addDoc, getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const questions = [
 {question:"根管治療常使用哪種器械？",options:["牙鉗","根管銼針","超音波潔牙機","咬合紙"],answer:1},
@@ -24,34 +24,46 @@ let playerName = "";
 
 window.joinGame = function(){
   playerName = document.getElementById("name").value;
-  if(!playerName){ alert("請輸入名字"); return;}
+
+  if(!playerName){
+    alert("請輸入名字");
+    return;
+  }
+
   document.getElementById("startScreen").style.display="none";
   document.getElementById("gameScreen").style.display="block";
+
   startTime = Date.now();
   showQuestion();
 }
 
 function showQuestion(){
   clearInterval(timer);
+
   let q = questions[current];
   document.getElementById("question").textContent = q.question;
+
   let optionsDiv = document.getElementById("options");
   optionsDiv.innerHTML="";
+
   q.options.forEach((opt,i)=>{
     let btn = document.createElement("button");
     btn.textContent = opt;
     btn.onclick = ()=>checkAnswer(i);
     optionsDiv.appendChild(btn);
   });
+
   startTimer();
 }
 
 function startTimer(){
   let timeLeft = 8;
   document.getElementById("time").textContent=timeLeft;
+
   timer = setInterval(()=>{
     timeLeft--;
     document.getElementById("time").textContent=timeLeft;
+
     if(timeLeft<=0){
       clearInterval(timer);
       nextQuestion();
@@ -60,8 +72,6 @@ function startTimer(){
 }
 
 function checkAnswer(i){
-  if(current >= questions.length) return;
-
   if(i===questions[current].answer){
     correct++;
   }
@@ -69,12 +79,8 @@ function checkAnswer(i){
   clearInterval(timer);
   nextQuestion();
 }
-  clearInterval(timer);
-  nextQuestion();
-}
 
 function nextQuestion(){
-  clearInterval(timer);
   current++;
 
   if(current >= questions.length){
@@ -88,25 +94,38 @@ function nextQuestion(){
 async function endGame(){
   let totalTime = Math.floor((Date.now()-startTime)/1000);
   let score = correct*1000 - totalTime;
+
   await addDoc(collection(db,"players"),{
     name:playerName,
     score:score,
     correct:correct,
     time:totalTime
   });
+
   showResult(score);
 }
 
 async function showResult(score){
   document.getElementById("gameScreen").style.display="none";
   document.getElementById("resultScreen").style.display="block";
+
   document.getElementById("score").textContent="你的分數："+score;
+
   let snapshot = await getDocs(collection(db,"players"));
   let players=[];
-  snapshot.forEach(doc=>players.push(doc.data()));
+
+  snapshot.forEach(doc=>{
+    players.push(doc.data());
+  });
+
   players.sort((a,b)=>b.score-a.score);
+
   let rank = players.findIndex(p=>p.name===playerName)+1;
+
   document.getElementById("ranking").textContent="你的名次："+rank;
 }
+  document.getElementById("ranking").textContent="你的名次："+rank;
+}
+
 
 
