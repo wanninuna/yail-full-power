@@ -10,7 +10,12 @@
 <h1 class="title">主持人控制台</h1>
 
 <button onclick="celebrate()">公布前三名🎆</button>
-
+<button onclick="loadRanking()">刷新排行榜</button>
+<button onclick="resetRanking()">重設排行榜</button>
+  
+<h2>排行榜</h2>
+<div id="ranking"></div>
+  
 <script>
 function celebrate(){
 confetti({
@@ -23,4 +28,5 @@ origin:{y:0.6}
 
 </body>
 </html>
+
 
