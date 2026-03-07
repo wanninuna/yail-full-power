@@ -111,19 +111,9 @@ async function showResult(score){
 
   document.getElementById("score").textContent="你的分數："+score;
 
-  let snapshot = await getDocs(collection(db,"players"));
-  let players=[];
-
-  snapshot.forEach(doc=>{
-    players.push(doc.data());
-  });
-
-  players.sort((a,b)=>b.score-a.score);
-
-  let rank = players.findIndex(p=>p.name===playerName)+1;
-
-  document.getElementById("ranking").textContent="你的名次："+rank;
+  document.getElementById("ranking").style.display="none";
 }
+
 
 
 
