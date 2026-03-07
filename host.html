@@ -2,31 +2,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="style.css">
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<title>主持人控制台</title>
 </head>
+
 <body>
 
-<h1 class="title">主持人控制台</h1>
+<h1>主持人控制台 🎮</h1>
 
-<button onclick="celebrate()">公布前三名🎆</button>
 <button onclick="loadRanking()">刷新排行榜</button>
 <button onclick="resetRanking()">重設排行榜</button>
-  
+
 <h2>排行榜</h2>
 <div id="ranking"></div>
-  
-<script>
-function celebrate(){
-confetti({
-particleCount:200,
-spread:120,
-origin:{y:0.6}
-});
-}
-</script>
+
+<script type="module" src="host.js"></script>
 
 </body>
 </html>
+
+</body>
+</html>
+
 
 
